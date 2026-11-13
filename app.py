@@ -106,7 +106,7 @@ def create_app(config=None):
     @app.get('/api/cases')
     @auth()
     def cases():
-        sql='SELECT c.*,d.name department,d.region,(SELECT count(*) FROM evaluations e WHERE e.case_id=c.id AND e.target=\'service\') evaluated FROM cases c JOIN departments d ON d.id=c.department_id'
+        sql='SELECT c.*,d.name department,d.region,(SELECT count(*) FROM evaluations e WHERE e.case_id=c.id AND e.target=\'service\') evaluated,(SELECT group_concat(e.target) FROM evaluations e WHERE e.case_id=c.id) evaluated_targets FROM cases c JOIN departments d ON d.id=c.department_id'
         args=[]
         if g.user['role']=='citizen':sql+=' WHERE c.user_id=?';args=[g.user['id']]
         elif g.user['role'] in ('window','rectifier'):sql+=' WHERE c.department_id=?';args=[g.user['department_id']]
