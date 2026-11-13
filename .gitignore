@@ -1,0 +1,14 @@
+.venv/
+.local/
+__pycache__/
+*.pyc
+.coverage*
+htmlcov/
+.env
+*.log
+build/
+
+# Local coursework artifacts must never be published.
+/docs/
+*.docx
+*.pdf

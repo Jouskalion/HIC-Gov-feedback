@@ -1,0 +1,10 @@
+services:
+  feedback:
+    build: .
+    ports:
+      - "5100:5100"
+    volumes:
+      - feedback-data:/app/.local
+    restart: unless-stopped
+volumes:
+  feedback-data:
