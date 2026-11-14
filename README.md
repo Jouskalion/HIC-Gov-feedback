@@ -59,14 +59,27 @@ Docker 可选：`docker compose up --build`。数据库持久化在独立的 `fe
 ## 目录
 
 ```text
-app.py                 HTTP 接口、登录会话、权限、统计与 CSV
+app.py                 应用工厂与启动入口，组装后端模块
+server/config.py       项目路径与角色常量
+server/lifecycle.py    请求认证、错误处理、响应头与连接清理
+server/security.py     接口授权与请求体校验
+server/routes/         账号、办件、评价、工单、消息和报表接口
+server/ticket_service.py 工单访问与查询辅助
+server/report_service.py 报表筛选与查询辅助
 services.py            评价资格、状态机、问卷计分
 db.py                  连接管理与确定性模拟数据
 schema.sql             表、约束、索引
-static/                页面、样式、前端逻辑与离线资源
+static/app.js          前端启动与全局事件入口
+static/js/             账号、导航、工作台、办件、评价、工单、报表与图表模块
+static/js/state.js     显式共享的页面状态（appState）
+static/js/api.js       HTTP 请求与会话令牌处理
+static/js/ui.js        通用界面组件与显示常量
+static/                HTML、样式与离线资源
 docs/                  实验报告、图表、可编辑 PlantUML 与报告生成源码
 tests/test_workflow.py  临时数据库中的回归检查
 ```
+
+后端由 `app.py` 注册各模块；路由调用业务辅助模块，复用 `services.py` 和 `db.py`，业务模块不反向导入应用入口。前端使用原生 ES 模块，页面通过显式导入共享状态、请求和界面组件；`static/app.js` 负责启动与事件分发。保持原有启动方式、接口和数据库结构，无需前端构建步骤，请通过本地 HTTP 服务访问页面。
 
 ## 关键接口
 
