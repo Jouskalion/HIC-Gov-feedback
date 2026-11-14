@@ -33,5 +33,3 @@ def register(app):
         require(row['user_id']==g.user['id'],'请使用该办件的群众账号登录',403)
         require(row['expires_at']>=now(),'此补评链接已过期',410)
         return jsonify(case_id=row['case_id'])
-
-

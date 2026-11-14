@@ -8,5 +8,3 @@ def ticket_access(row):
 
 
 ticket_sql='SELECT t.*,e.user_id,e.rating,e.comment,e.tags,e.target,e.anonymous,c.title,c.number,c.simulated,d.name department,d.region,u.name assignee FROM tickets t JOIN evaluations e ON e.id=t.evaluation_id JOIN cases c ON c.id=e.case_id JOIN departments d ON d.id=t.department_id LEFT JOIN users u ON u.id=t.assignee_id'
-
-

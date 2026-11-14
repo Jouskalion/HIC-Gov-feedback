@@ -18,5 +18,3 @@ def body():
     data=request.get_json(silent=True)
     require(isinstance(data,dict),'请求格式无效')
     return data
-
-

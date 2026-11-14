@@ -44,5 +44,3 @@ def register(app):
         r.headers['X-Frame-Options']='DENY'
         if request.path.startswith('/api/'):r.headers['Cache-Control']='no-store'
         return r
-
-

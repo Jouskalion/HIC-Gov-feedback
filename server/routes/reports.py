@@ -49,5 +49,3 @@ def register(app):
             w.writerow(rows[0].keys())
             for r in rows:w.writerow([("'"+str(v)) if isinstance(v,str) and v.startswith(('=','+','-','@','\t','\r')) else v for v in r])
         return Response('\ufeff'+buf.getvalue(),mimetype='text/csv',headers={'Content-Disposition':f'attachment; filename="{kind}.csv"'})
-
-

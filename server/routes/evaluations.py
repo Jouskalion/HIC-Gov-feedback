@@ -37,5 +37,3 @@ def register(app):
         seconds=d.get('task_seconds',0);require(type(seconds) in (int,float) and 0<=seconds<=86400,'任务用时无效')
         with get_db() as c:c.execute('INSERT INTO surveys(evaluation_id,user_id,instrument,answers,tlx,usability_score,workload_score,task_seconds,created_at) VALUES (?,?,?,?,?,?,?,?,?)',(e['id'],g.user['id'],instrument,json.dumps(a),json.dumps(tlx),score,load,seconds,now()))
         return jsonify(usability_score=score,workload_score=load),201
-
-

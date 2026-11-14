@@ -9,5 +9,3 @@ def filtered_records():
             op='>=' if field=='start' else '<=' if field=='end' else '='
             sql+=f' AND {col}{op}?';args.append(value+'T23:59:59+08:00' if field=='end' else value)
     return [dict(r) for r in get_db().execute(sql+' ORDER BY e.id DESC',args)]
-
-

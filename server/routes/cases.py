@@ -30,5 +30,3 @@ def register(app):
         with get_db() as c:
             cid=c.execute('INSERT INTO cases(number,user_id,department_id,title,channel,scenario,materials,created_at,completed_at,simulated) VALUES (?,?,?,?,?,?,?,?,?,1)',('LAB-'+secrets.token_hex(4).upper(),uid,department,title,channel,scenario,materials,at,at)).lastrowid
         return jsonify(id=cid),201
-
-

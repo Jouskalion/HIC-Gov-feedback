@@ -30,5 +30,3 @@ def register(app):
         with get_db() as c:
             c.execute('BEGIN IMMEDIATE');result=transition(c,g.user,tid,body())
         return jsonify(result)
-
-

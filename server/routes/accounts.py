@@ -48,5 +48,3 @@ def register(app):
     def meta():
         c=get_db()
         return jsonify(departments=[dict(x) for x in c.execute('SELECT * FROM departments')],staff=[dict(x) for x in c.execute("SELECT id,name,role,department_id FROM users WHERE role='rectifier'")])
-
-
